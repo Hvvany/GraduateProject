@@ -21,16 +21,28 @@
 
 unsigned char i=0;
 unsigned int  Distance=0;
+unsigned int  Distance2=0;
 unsigned char Rx_DATA[8];
+unsigned char Rx2_DATA[8];
 unsigned char CMD[6]={
   header_H,header_L,device_Addr,data_Length,get_Dis_CMD,checksum}; //Distance command package
 
 void setup() {
   pinMode(2, OUTPUT);
   pinMode(3, OUTPUT);
-  digitalWrite(3, HIGH);  //Ultrasonic VCC
   digitalWrite(2, LOW);   //Ultrasonic GND
+  digitalWrite(3, HIGH);  //Ultrasonic VCC
+
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  digitalWrite(4, LOW);   //Ultrasonic GND
+  digitalWrite(5, HIGH);  //Ultrasonic VCC
+
+
+
+
   Serial1.begin(19200);  //Serial1: Ultrasonic Sensor Communication Serial Port, Buadrate: 19200
+  Serial2.begin(19200);  //Serial1: Ultrasonic Sensor Communication Serial Port, Buadrate: 19200
   Serial.begin(19200);   //Serial: USB Serial Data output, baudrate: 19200
 }
 
@@ -43,7 +55,22 @@ void loop() {
   while (Serial1.available()){  //Read the return data (Note: this demo is only for the reference, no data verification)
     Rx_DATA[i++]=(Serial1.read());
   }
+
   Distance=((Rx_DATA[5]<<8)|Rx_DATA[6]); //Read the distance value
   Serial.print(Distance);               //print distance value
   Serial.println("cm");
+
+
+  for(i=0;i<6;i++){
+  Serial2.write(CMD[i]);
+  }
+  delay(150);  //Wait for the result
+  i=0;
+  while (Serial2.available()){  //Read the return data (Note: this demo is only for the reference, no data verification)
+    Rx2_DATA[i++]=(Serial2.read());
+  }
+
+  Distance2=((Rx2_DATA[5]<<8)|Rx2_DATA[6]); //Read the distance value
+  Serial.print(Distance2);               //print distance value
+  Serial.println("cm_2");
 }
