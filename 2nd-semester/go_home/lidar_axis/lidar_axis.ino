@@ -1,3 +1,5 @@
+#include <SoftwareSerial.h>
+
 //라이다 선언
 #include <DFRobot_TFmini.h>
 SoftwareSerial mySerial(8, 7); // RX, TX
@@ -164,7 +166,7 @@ void loop() {
               Serial.println("\ny");
               Serial.print(y);
               Serial.println("\nangle");
-              Serial.println(angle);
+              Serial.print(angle);
               
               if(x>70&&y>70){                   ///////1번 구역
 //                digitalWrite(10, HIGH);
