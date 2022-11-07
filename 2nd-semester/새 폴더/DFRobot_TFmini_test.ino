@@ -17,7 +17,7 @@ DFRobot_TFmini  TFmini;
 uint16_t distance,strength;
 
 void setup(){
-    Serial.begin(9600);
+    Serial.begin(115200);
     TFmini.begin(mySerial);
 }
 

@@ -1,6 +1,6 @@
-#define TRIG 0 //TRIG 핀 설정 (초음파 보내는 핀)
+#define TRIG 12 //TRIG 핀 설정 (초음파 보내는 핀)
 
-#define ECHO 1 //ECHO 핀 설정 (초음파 받는 핀)
+#define ECHO 13 //ECHO 핀 설정 (초음파 받는 핀)
 
 
 
@@ -13,10 +13,10 @@ void setup() {
                        //시리얼 통신을 이용해 PC모니터로 데이터 값을 확인하는 부분은 자주사용되기 때문에
 
                        //필수로 습득해야하는 교육코스 입니다.
-  pinMode(2, OUTPUT);
-  digitalWrite(2, LOW);
+  pinMode(12, OUTPUT);
+  digitalWrite(12, LOW);
   
-  pinMode(3, OUTPUT);
+  pinMode(13, OUTPUT);
   digitalWrite(TRIG, HIGH);                 
 
 

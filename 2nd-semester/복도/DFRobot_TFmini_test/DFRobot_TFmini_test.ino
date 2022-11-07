@@ -16,10 +16,6 @@ int now_angle = 0;
 int cnt = 0;
 int before_distance = 400;
 int difference = 0;
-double avg;
-bool repeat=false;
-int average[5]={0,0,0,0,0};
-int average_cnt = 0;
 
 // PIR 선언
 #define SIGNAL_PIN 10
