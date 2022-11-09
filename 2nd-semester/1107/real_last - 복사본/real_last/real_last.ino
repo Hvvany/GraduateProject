@@ -13,9 +13,8 @@ SoftwareSerial mySerial(8, 7); // RX, TX
 DFRobot_TFmini  TFmini;
 uint16_t distance,strength;
 
-
-const int trigPinM = 7;
-const int echoPinM = 8;
+//const int trigPinM = 7;
+//const int echoPinM = 8;
 
 const int trigPinR = 12;
 const int echoPinR = 13;
@@ -38,35 +37,37 @@ void setup() {
   servo.attach(9);
   servo.write(45);
 
-  pinMode(trigPinM, OUTPUT);
-  pinMode(echoPinM, INPUT);
+//  pinMode(trigPinM, OUTPUT);
+//  pinMode(echoPinM, INPUT);
   pinMode(trigPinR, OUTPUT);
   pinMode(echoPinR, INPUT);
   pinMode(trigPinL, OUTPUT);
   pinMode(echoPinL, INPUT);
-  pinMode(10, OUTPUT);
-  pinMode(11, OUTPUT);
-  pinMode(12, OUTPUT);
-  pinMode(13, OUTPUT);
+//  pinMode(10, OUTPUT);
+//  pinMode(11, OUTPUT);
+//  pinMode(12, OUTPUT);
+//  pinMode(13, OUTPUT);
   Serial.begin(9600);
+  TFmini.begin(mySerial);
   
 }
 
 void loop() {
    
-   digitalWrite(10,LOW);
-   digitalWrite(11,LOW);
-   digitalWrite(12,LOW);
-   digitalWrite(13,LOW);
-   
-   digitalWrite(trigPinM, LOW);
-   delayMicroseconds(2);
-   digitalWrite(trigPinM, HIGH);
-   delayMicroseconds(10);
-   digitalWrite(trigPinM, LOW);
-   if(TFmini.measure()){  
+//   digitalWrite(10,LOW);
+//   digitalWrite(11,LOW);
+//   digitalWrite(12,LOW);
+//   digitalWrite(13,LOW);
+//   
+//   digitalWrite(trigPinM, LOW);
+//   delayMicroseconds(2);
+//   digitalWrite(trigPinM, HIGH);
+//   delayMicroseconds(10);
+//   digitalWrite(trigPinM, LOW);
+   if(TFmini.measure()){ 
    distanceM = TFmini.getDistance();    //중앙의 초음파 시간으로 물체의 위치 계산
    }
+   
    digitalWrite(trigPinR, LOW);
    delayMicroseconds(2);
    digitalWrite(trigPinR, HIGH);
@@ -121,36 +122,36 @@ void loop() {
 
 servo.write(angle);
 
-
-    ///좌표 변환 및 구역 나누기
-    double x = distanceM * cos(angle * pi / 180);
-    double y = distanceM * sin(angle * pi / 180);
-    Serial.println("\nx");
-    Serial.print(x);
-    Serial.println("\ny");
-    Serial.print(y);
-    Serial.println("\nangle");
-    Serial.print(angle);
-    
-    if(x>70&&y>70){         ///////1번 구역
-      digitalWrite(10, HIGH);
-      Serial.println("1번 구역");
-      
-    }
-    else if(x>70&&y>0&&y<=70){      ///////2번 구역
-      digitalWrite(11, HIGH);
-      Serial.println("2번 구역");
-      
-    }
-    else if(x>0&&x<=70&&y>70){      ///////3번 구역
-      digitalWrite(12, HIGH);
-      Serial.println("3번 구역");
-      
-    }
-    else if(x>0&&x<=70&&y>0&&y<=70){        ///////4번 구역
-      digitalWrite(13, HIGH);
-      Serial.println("4번 구역");
-      
-    }
-    delay(100);
+//
+//    ///좌표 변환 및 구역 나누기
+//    double x = distanceM * cos(angle * pi / 180);
+//    double y = distanceM * sin(angle * pi / 180);
+//    Serial.println("\nx");
+//    Serial.print(x);
+//    Serial.println("\ny");
+//    Serial.print(y);
+//    Serial.println("\nangle");
+//    Serial.print(angle);
+//    
+//    if(x>70&&y>70){         ///////1번 구역
+//      digitalWrite(10, HIGH);
+//      Serial.println("1번 구역");
+//      
+//    }
+//    else if(x>70&&y>0&&y<=70){      ///////2번 구역
+//      digitalWrite(11, HIGH);
+//      Serial.println("2번 구역");
+//      
+//    }
+//    else if(x>0&&x<=70&&y>70){      ///////3번 구역
+//      digitalWrite(12, HIGH);
+//      Serial.println("3번 구역");
+//      
+//    }
+//    else if(x>0&&x<=70&&y>0&&y<=70){        ///////4번 구역
+//      digitalWrite(13, HIGH);
+//      Serial.println("4번 구역");
+//      
+//    }
+//    delay(100);
 }
