@@ -20,20 +20,24 @@ int difference = 0;
 // PIR 선언
 #define SIGNAL_PIN 10
 
-
+bool person = false;
 //-------------------------------------------------------------------------------------------------------------------------------
 void setup() {
+  
   // 서보 셋업
   servo.attach(servoPin);
   servo.write(angle);
   servo2.attach(servoPin2);
   servo2.write(angle);
+  
   // 라이다 셋업
   Serial.begin(115200);
   TFmini.begin(mySerial);
+  
   // 라이트 셋업
   pinMode(3, OUTPUT);
   digitalWrite(3, HIGH);
+  
   // PIR 셋업
   pinMode(SIGNAL_PIN, INPUT);
   angle = 0;
@@ -49,7 +53,7 @@ void loop() {
 
       servo.write(angle);
       for(angle; angle < 100; angle=angle + 1){       // 각도 감소
-        repeat = false;
+        person = false;
 
 //        if(digitalRead(SIGNAL_PIN) == LOW) {        // pir 사람 없으면
 //          pinMode(3, OUTPUT);                            // led 불 끄고
@@ -79,65 +83,69 @@ void loop() {
 
 
               if ( difference > 100){
-                
-                repeat = true;
+                person = true;
                 before_distance = distance;
-                now_angle = (angle + before_angle)/4;
-                Serial.print("now_angle");
-                Serial.println(now_angle);
-                if (average_cnt < 5){
-                  average[cnt] = now_angle;
-                }
-                else{
-                  int s = 0;
-                  for (int i=0; i< 5; i++)
-                  {
-                      s += average[i];
-                      Serial.println(average[i]);
-                  }
-                  servo2.write(s/5);
-                  average_cnt = 0;
-                }
-                average_cnt += 1;
+//                now_angle = (angle + before_angle)/4;
+//                servo2.write(now_angle);
+//                Serial.print("now_angle");
+//                Serial.println(now_angle);
+//                if (average_cnt < 5){
+//                  average[cnt] = now_angle;
+//                }
+//                else{
+//                  int s = 0;
+//                  for (int i=0; i< 5; i++)
+//                  {
+//                      s += average[i];
+//                      Serial.println(average[i]);
+//                  }
+//                  servo2.write(s/5);
+//                  average_cnt = 0;
+//                }
+//                average_cnt += 1;
                 before_angle = angle;
                 break;
                 }
                 before_distance = distance;
               }
+//              if (person==true && angle >= 100){
+//              Serial.print("사람 나간 후 출력 값");
+//              before_distance = distance;
+//              now_angle = (angle + before_angle)/4;
+//              servo2.write(now_angle);
+//              Serial.print("now_angle");
+//              Serial.println(now_angle);
+
+
+//        if (average_cnt < 5){
+//          average[cnt] = now_angle;
+//        }
+//        else{
+//        int s = 0;
+//        for (int i=0; i< 5; i++)
+//        {
+//            s += average[i];
+//            Serial.println(average[i]);
+//        }
+//        servo2.write(s/5);
+//        average_cnt = 0;
+//        }
+//        average_cnt += 1;
+//              before_angle = angle;
+//            }
               delay(4);
 
 //        }
         
       }
-      if (repeat==true){
-        
-        repeat = true;
-        before_distance = distance;
-        now_angle = (angle + before_angle)/4;
-        Serial.print("now_angle");
-        Serial.println(now_angle);
-        if (average_cnt < 5){
-          average[cnt] = now_angle;
-        }
-        else{
-        int s = 0;
-        for (int i=0; i< 5; i++)
-        {
-            s += average[i];
-            Serial.println(average[i]);
-        }
-        servo2.write(s/5);
-        average_cnt = 0;
-        }
-        average_cnt += 1;
-        before_angle = angle;
-      }
+      
+
       
 
 
       servo.write(angle);
       for(angle; angle > 0; angle = angle - 1){       // 각도 감소
-        repeat=false;
+        person=false;
 
 //        if(digitalRead(SIGNAL_PIN) == LOW) {        // pir 사람 없으면
 //          pinMode(3, OUTPUT);                            // led 불 끄고
@@ -167,55 +175,60 @@ void loop() {
 
 
               if ( difference > 100){
-                repeat=true;
+//                person=true;
                 before_distance = distance;
                 now_angle = (angle + before_angle)/4;
-                if (average_cnt < 5){
-                  average[cnt] = now_angle;
-                }
-                else{
-                int s = 0;
-                  for (int i=0; i< 5; i++)
-                  {
-                      s += average[i];
-                      Serial.println(average[i]);
-                  }
-                  servo2.write(s/5);
-                average_cnt = 0;
-                }
-                average_cnt += 1;
+                servo2.write(now_angle);
+//                Serial.print("now_angle");
+//                Serial.println(now_angle);
+//                if (average_cnt < 5){
+//                  average[cnt] = now_angle;
+//                }
+//                else{
+//                int s = 0;
+//                  for (int i=0; i< 5; i++)
+//                  {
+//                      s += average[i];
+//                      Serial.println(average[i]);
+//                  }
+//                  servo2.write(s/5);
+//                average_cnt = 0;
+//                }
+//                average_cnt += 1;
                 before_angle = angle;
                 break;
                 }
                 before_distance = distance;
               }
+//              if (person==true && angle <= 0){
+//              Serial.print("사람 나간 후 출력 값");
+//              before_distance = distance;
+//              now_angle = (angle + before_angle)/4;
+//              servo2.write(now_angle);
+//              Serial.print("now_angle");
+//              Serial.println(now_angle);
+
+      //        if (average_cnt < 5){
+      //          average[cnt] = now_angle;
+      //        }
+      //        else{
+      //        int s = 0;
+      //        for (int i=0; i< 5; i++)
+      //        {
+      //            s += average[i];
+      //            Serial.println(average[i]);
+      //        }
+      //        servo2.write(s/5);
+      //        average_cnt = 0;
+      //        }
+      //        average_cnt += 1;
+//              before_angle = angle;
+//            }
            delay(4);
 
 //        }
       }
-      if (repeat==true){
-        
-        repeat = true;
-        before_distance = distance;
-        now_angle = (angle + before_angle)/4;
-        Serial.print("now_angle");
-        Serial.println(now_angle);
-        if (average_cnt < 5){
-          average[cnt] = now_angle;
-        }
-        else{
-        int s = 0;
-        for (int i=0; i< 5; i++)
-        {
-            s += average[i];
-            Serial.println(average[i]);
-        }
-        servo2.write(s/5);
-        average_cnt = 0;
-        }
-        average_cnt += 1;
-        before_angle = angle;
-      }
+      
       
        
 //      if(angle<=0){

@@ -12,12 +12,12 @@ void setup() {
 
 void loop() {
   servo.write(angle);
-  for(angle = 0; angle < 103; angle++){
+  for(angle = 0; angle < 100; angle=angle+20){
     servo.write(angle);
-    delay(30);
+    delay(1000);
   }
-  for(angle = 103; angle > 0; angle--){
+  for(angle = 100; angle > 0; angle=angle-20){
     servo.write(angle);
-    delay(30);
-}
+    delay(1000);
+  }
 }

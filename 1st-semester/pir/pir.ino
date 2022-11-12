@@ -1,8 +1,8 @@
 
-#define SIGNAL_PIN 8
+#define SIGNAL_PIN 10
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(SIGNAL_PIN, INPUT);
 }
 
@@ -12,5 +12,5 @@ void loop() {
  }else{
   Serial.println("NO PERSON");
 }
-  delay(1000);
+  delay(500);
 }

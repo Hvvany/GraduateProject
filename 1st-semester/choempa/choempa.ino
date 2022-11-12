@@ -1,6 +1,6 @@
-#define TRIG 6 //TRIG 핀 설정 (초음파 보내는 핀)
+#define TRIG 4 //TRIG 핀 설정 (초음파 보내는 핀)
 
-#define ECHO 7 //ECHO 핀 설정 (초음파 받는 핀)
+#define ECHO 5 //ECHO 핀 설정 (초음파 받는 핀)
 
 
 
