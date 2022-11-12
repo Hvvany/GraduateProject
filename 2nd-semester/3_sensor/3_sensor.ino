@@ -1,3 +1,8 @@
+
+//----------------------------------------------------------------------------------------------------------------------------
+#include "Queue.h"
+
+Queue<int> queue = Queue<int>(); // Queue of max 256 int
 //라이다 선언
 #include <DFRobot_TFmini.h>
 SoftwareSerial mySerial(8, 7); // RX, TX
